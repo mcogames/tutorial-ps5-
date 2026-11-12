@@ -1,67 +1,27 @@
-# MCO GAMES — Tutorial Interativo PS5 v0.7.6
+# MCO GAMES • PS5 — v0.8.0
 
-Três fluxos em uma página independente para GitHub Pages:
+Atualização focada apenas no tutorial **Cadeado no jogo**.
 
-- **Primária**: instalação e verificação de Compartilhamento do console e jogo offline; retorno ao perfil pessoal apenas quando a conta tem licença e compartilha o conteúdo neste console.
-- **Secundária**: roteiro independente; não instrui a habilitar compartilhamento; orienta uso pelo perfil que possui licença válida, possivelmente exigindo internet.
-- **Cadeado no jogo**: diagnóstico de licença, compartilhamento e restauração de licenças.
+- As telas com jogo e perfis usam as capturas reais fornecidas (Elden Ring).
+- Os menus de fundo padrão do PS5 foram redesenhados fielmente com SVG: Configurações, Usuários e contas, Outros, Compartilhamento, Habilitar, OK.
+- Sobreposições com texto “Sua Conta Pessoal” preservam os demais elementos das capturas originais.
+- Setas/trilhas neon sincronizadas e duas repetições de cada orientação, mantendo a navegação automática.
+- O procedimento correto usa a conta que possui a licença para habilitar compartilhamento; depois retorna ao perfil pessoal.
+- Na ativação padrão existe acesso a ajuda e WhatsApp: (99) 98181-0222.
+- Os tutoriais Primária e Secundária não foram alterados.
 
-## Instalação no GitHub
+## GitHub Pages
+Envie **index.html** para a raiz do repositório. As imagens do roteiro Cadeado estão incorporadas neste HTML, e não dependem de arquivos externos. Os PNGs oficiais da logo também acompanham o ZIP.
 
-Envie os arquivos `index.html`, `app.js`, `styles.css` e a pasta `assets/` para **a raiz** do repositório `tutorial-ps5-`. Se o GitHub Pages estiver configurado em `main` / `root`, abra:
-
-https://mcogames.github.io/tutorial-ps5-/
-
-A tela inicial sempre apresenta as três escolhas. Para personalizar o nome do jogo:
-
-https://mcogames.github.io/tutorial-ps5-/?jogo=EA%20Sports%20FC%2026
-
-Os parâmetros `licenca=primaria` e `licenca=secundaria` podem destacar a opção, mas não pulam a seleção. O NEXUS ainda não está integrado.
-
-## Recursos
-
-- Passagem automática com **2 ciclos por indicação**, neon circular/retangular e seta/trilha sincronizadas.
-- Pausar, voltar, próxima tela e menu de etapas.
-- Progresso separado para cada roteiro salvo no navegador, sem dados de autenticação.
-- Layout responsivo ajustado à altura do navegador; opção de ampliar a simulação.
-- QR Code de exemplo não funcional, sem campos para e-mail, senha ou código 2FA no site.
-- Reconstruções visuais orientativas, não capturas oficiais da interface.
-
-## Segurança e limites
-
-Os termos *primária* e *secundária* são nomes comerciais, não categorias de licenças oficiais da Sony. Uma conta só pode habilitar Compartilhamento do console e jogo offline em um PS5 por vez. A disponibilidade dos jogos depende de licença válida, regras da plataforma e condições da conta. Não altere a ativação de outro console sem autorização do titular.
-
-Fontes de orientação:
-- https://www.playstation.com/pt-br/support/account/ps5-console-sharing-offline-play/
-- https://www.playstation.com/pt-br/support/games/restore-licences-playstation/
-
-### Suporte na ativação primária
-Na etapa **Verificar ativação primária**, escolha **Aviso de outro PS5**: o botão **Falar com suporte no WhatsApp** abre `https://wa.me/5599981810222` com uma mensagem pronta. Nenhum dado da conta é transmitido pelo tutorial.
-
-### Ajuste recente no fluxo Secundária
-Na etapa **Conferir compartilhamento**, quando a opção já aparece habilitada no PS5, o tutorial agora mostra a tela correta com **Desativar** e, depois, a confirmação **OK**.
-
-### Ajuste da secundária (v0.7.3)
-A etapa **Desativar compartilhamento** mostra diretamente o fluxo padrão do PS5: **Desativar** → **OK**. Não há seletor para o cliente decidir qual tela seguir. A opção opcional **Minha tela está diferente** oferece três alternativas: já aparece Habilitar (a função está desativada), houve erro (com contato de WhatsApp), ou voltar ao caminho principal. Uma falha bloqueia o avanço automático até que seja resolvida.
+## Correção da ordem das telas — v0.8.1
+- Tela 1: tela detalhada de ELDEN RING, com seta neon apontando ao cadeado junto ao título.
+- Tela 2: home do PS5 com ELDEN RING, com seta neon apontando ao avatar no canto superior direito.
+- Tela 3: menu de perfil e opção Alternar usuário, mantida.
+- As demais etapas, logos, modos Primária/Secundária e suporte foram preservados.
 
 
-### Ajuste do fluxo Cadeado (v0.7.4)
-- A etapa de compartilhamento no guia “Cadeado no jogo” passou a seguir um fluxo padrão: **Habilitar** -> mensagem de confirmação -> **OK**.
-- Se o cliente visualizar uma tela diferente nessa etapa, o guia exibe o botão **“Minha tela está diferente”** com link direto para o suporte no WhatsApp.
-- Os rótulos de usuário voltados ao cliente foram ajustados para **“Sua Conta Pessoal”**.
-
-### Identidade visual v0.7.5
-- Entrada alterada de “Parabéns pela compra” para “Central de Instalação e Suporte”.
-- Logo horizontal de 2025 na abertura, símbolo quadrado de 2026 no cabeçalho/favicon.
-- Ambos os PNGs originais são preservados em `assets/`. A inversão monocromática no CSS permite contraste no fundo escuro.
-- Quando recebido pelo URL, o nome do jogo aparece discretamente na abertura.
-
-
-## Publicação sem arquivos antigos (v0.7.6)
-1. **Extraia o ZIP** no computador. Faça upload dos arquivos **da raiz** (`index.html`, `app.js`, `styles.css`, `assets/`, etc.) para a raiz do repositório, substituindo os existentes. Não envie somente o ZIP nem a pasta contendo o projeto.
-2. No GitHub, em **Code**, confirme que o `index.html` mostra `<meta name="mco-build" content="0.7.6" />` e que a importação é `app.js?v=0.7.6`.
-3. Em **Settings > Pages**, confirme a fonte de publicação: branch `main`, pasta `/ (root)` (se seu Pages usa branch). Em **Actions**, acompanhe a execução da publicação.
-4. Abra `https://mcogames.github.io/tutorial-ps5-/?v=0.7.6` e faça recarregamento forçado (`Ctrl+Shift+R`) se necessário.
-5. No modo **SECUNDÁRIA**, etapa **13/19**, confirme título **Desativar compartilhamento**, o botão **Desativar**, depois **OK**. Não existe seletor de estado nessa etapa; a ajuda é oferecida em **Minha tela está diferente**.
-
-A versão 0.7.6 não muda os roteiros: apenas impede o navegador de reutilizar o CSS/JavaScript antigo após a atualização e adiciona um identificador técnico invisível da versão.
+## v0.8.2 — Correção visual da etapa 3
+- A seta/trilha e o contorno neon da etapa **Alternar usuário** foram alinhados à opção correta, em vez de **Troféus**.
+- A imagem original de Elden Ring continua servindo de fundo; o neon é uma animação SVG dinâmica com duas repetições.
+- O identificador **Sua Conta Pessoal** foi posicionado sobre o nome original, evitando nomes duplicados.
+- As outras 12 etapas, os modos Primária/Secundária e os logos não foram modificados.
