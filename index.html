@@ -14,20 +14,37 @@
       <img src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
     </a>
     <span class="header-caption">Instalação PS5</span>
-    <button id="helpTop" class="header-help" type="button" aria-label="Abrir ajuda">Ajuda <span>?</span></button>
+    <div class="header-tools">
+      <button id="lockMenu" class="lock-shortcut" type="button" aria-label="Voltar à seleção de tutoriais">⌂ Início</button>
+      <button id="helpTop" class="header-help" type="button" aria-label="Abrir ajuda">Ajuda <span>?</span></button>
+    </div>
   </header>
   <main id="inicio">
-    <section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+    <section id="welcome" class="welcome welcome-choices" aria-labelledby="welcomeTitle">
       <div class="welcome-glow" aria-hidden="true"></div>
-      <div class="welcome-content">
+      <div class="choice-content">
         <img class="welcome-logo" src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
+        <span class="welcome-eyebrow">SEU GUIA PS5</span>
         <h1 id="welcomeTitle">Parabéns pela compra do <em id="gameWelcome">seu jogo</em>!</h1>
-        <p>Siga o tutorial abaixo para concluir a instalação no seu PS5.</p>
-        <button id="start" type="button" class="btn btn-primary btn-xl">Começar agora <span>→</span></button>
-      </div>
-      <div class="welcome-visual" aria-hidden="true">
-        <div class="welcome-halo"></div><div class="ps5-illustration"><span class="ps-side left"></span><span class="ps-center"></span><span class="ps-side right"></span></div>
-        <div class="visual-controller"><span>✚</span><span class="ctrl-center">⌂</span><span>✧</span></div>
+        <p>Escolha como podemos ajudar você:</p>
+        <div class="mode-options" role="group" aria-label="Escolha seu tutorial">
+          <button id="choosePrimary" type="button" class="mode-card primary-card">
+            <span class="mode-card-icon" aria-hidden="true">◈</span>
+            <span class="mode-card-info"><strong>PRIMÁRIA</strong><small>Configurar o compartilhamento e instalar o jogo</small></span>
+            <span class="mode-card-arrow" aria-hidden="true">→</span>
+          </button>
+          <button id="chooseSecondary" type="button" class="mode-card secondary-card">
+            <span class="mode-card-icon" aria-hidden="true">◇</span>
+            <span class="mode-card-info"><strong>SECUNDÁRIA</strong><small>Instalar e acessar pela conta que possui o jogo</small></span>
+            <span class="mode-card-arrow" aria-hidden="true">→</span>
+          </button>
+          <button id="chooseLock" type="button" class="mode-card lock-card">
+            <span class="mode-card-icon" aria-hidden="true">🔒</span>
+            <span class="mode-card-info"><strong>CADEADO NO JOGO</strong><small>Verificar licenças e resolver problemas de acesso</small></span>
+            <span class="mode-card-arrow" aria-hidden="true">→</span>
+          </button>
+        </div>
+        <div class="welcome-tip">As orientações são para PS5. Você realiza cada ação no próprio console.</div>
       </div>
     </section>
 
@@ -37,6 +54,7 @@
           <span id="gameSubtitle">Seu jogo</span><span class="small-dot">·</span><span id="progressText">Etapa 1 de 21</span>
         </div>
         <div class="guide-actions">
+          <button type="button" id="switchGuide" class="icon-label-button mode-switch" aria-label="Voltar à escolha de tutoriais">⌂ Menu</button>
           <button type="button" id="stepsToggle" class="icon-label-button" aria-expanded="false" aria-controls="stepSidebar">Etapas</button>
           <button type="button" id="pauseAuto" class="icon-label-button" aria-pressed="false">❚❚ Pausar</button>
           <button type="button" id="restart" class="icon-label-button restart-button" aria-label="Reiniciar tutorial">↻</button>
@@ -46,6 +64,11 @@
       <div class="guide-layout">
         <aside id="stepSidebar" class="step-sidebar" aria-label="Todas as etapas">
           <div class="side-title">Todas as etapas <button id="closeSteps" type="button" aria-label="Fechar etapas">✕</button></div>
+          <div class="sidebar-quicklinks">
+            <button id="menuInstall" type="button">◈ Primária</button>
+            <button id="menuSecondary" type="button">◇ Secundária</button>
+            <button id="menuCadeado" type="button">🔒 Cadeado no jogo</button>
+          </div>
           <nav id="stepNavigation" aria-label="Ir para uma etapa"></nav>
         </aside>
         <div id="sidebarShade" class="sidebar-shade hidden"></div>

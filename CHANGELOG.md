@@ -1,16 +1,15 @@
-# Histórico de alterações
+# Histórico de versões
 
-## v0.5 — Prévia de refinamento para o cliente final
-- Fluxo automático com exatamente duas repetições por indicação e avanço para a próxima indicação ou tela.
-- Desenho da trilha e movimento da seta sincronizados por `requestAnimationFrame`.
-- Brilho do alvo animado após a chegada da seta.
-- Controles de pausar, continuar, ir e voltar; menu de etapas recolhido.
-- Interface de uma área adaptada à tela, sem rolagem da página principal em desktop/mobile.
-- Logo oficial da MCO GAMES; textos técnicos internos removidos da apresentação.
-- Textos de e-mail/senha mencionando dados recebidos da MCO GAMES.
-- Ícone da Biblioteca de jogos corrigido visualmente; seleção personalizada do jogo.
-- Tela final simplificada; nome de jogo vindo de `?jogo=`.
-- Acesso ao suporte e à ampliação do quadro preservados.
+## v0.7 — Tutorial unificado
+- Tela inicial única com três escolhas: **Primária**, **Secundária** e **Cadeado no jogo**.
+- Roteiro secundário próprio e independente, com tratamento seguro para compartilhamento desabilitado, habilitado e conflito de ativação.
+- Alternância entre roteiros pelo menu sem apagar o progresso salvo de cada um.
+- Mantidos os recursos v0.6: animação sincronizada de seta/trilha, neon pulsante, duas repetições automáticas e layout responsivo.
+- Restaurar licenças e solução de problemas continuam no guia Cadeado.
+- Fonte das regras técnicas: documentação oficial PlayStation.
 
-## v0.4
-- Primeiro fluxo completo primário com 21 etapas, capturas de referência e sobreposições neon.
+## v0.6 — Cadeado no jogo
+- Guia de diagnóstico independente.
+
+## v0.5 — Reprodução automática
+- Layout ajustado à altura da tela, reprodução automática e refinamento do neon.
