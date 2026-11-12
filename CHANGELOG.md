@@ -1,12 +1,15 @@
-# Changelog — v0.3
+# Changelog — MCO GAMES Tutorial PS5 Primária
 
-- Reconstruídas as telas PS5 com base na sequência real do vídeo, removendo marcas de terceiros e dados de autenticação.
-- Substituídas as imagens genéricas por telas vetoriais responsivas com textos e menus aproximados do console.
-- Setas SVG ficam visíveis desde a entrada em cada etapa; não é necessário clicar em “mostrar indicação”.
-- Implementados caminhos primário e secundário independentes via `?licenca=primaria` e `?licenca=secundaria`.
-- Corrigida a lógica do compartilhamento: primária mantém/habilita somente quando autorizado; secundária mantém desabilitado e não manda habilitar.
-- Adicionada tela de proteção da conta e explicação separada da 2FA.
-- Adicionadas orientação de biblioteca, diagnóstico de cadeado e restauração de licenças.
-- Adicionadas etapas distintas para alternar ao perfil pessoal (primária) ou permanecer na conta proprietária (secundária).
-- Incluídos README e contrato planejado para futura integração com o NEXUS.
-- Nenhuma integração ou alteração foi feita na loja ou no NEXUS.
+## v0.4 — 12/11/2026
+
+- Construído protótipo independente apenas para o fluxo **primária**, sem alterações ao site da loja ou NEXUS.
+- Tela inicial ajustada conforme texto aprovado: “Parabéns pela compra do [jogo]!” e “Começar agora”.
+- Introduzido parâmetro `jogo` dinâmico na mensagem e no exemplo de download.
+- Recriadas 21 telas com estrutura semelhante às capturas enviadas: cadastro, acordo, QR, login, 2FA, configuração, biblioteca, download, retorno ao usuário pessoal e conclusão.
+- Seta SVG em loop (desenho da trajetória + ponta deslocando-se), neon pulsante no formato de cada alvo.
+- Acordo, login e 2FA possuem animações sequenciais de múltiplas ações no mesmo cenário.
+- Adicionadas telas opcionais de proteção e pós-login e tela didática do download que faltava.
+- Criado seletor de estado de compartilhamento e bloqueio contra avanço quando há aviso de outra ativação.
+- Ajuda contextual para cadeado e restauração de licenças, com links Sony.
+- Suporte mobile, ampliação de tela e progresso local.
+- Sem armazenamento de senhas, e-mail, QR ou códigos 2FA.
