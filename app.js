@@ -5,7 +5,7 @@
   const game = (url.get('jogo') || url.get('game') || 'seu jogo').trim().slice(0,90) || 'seu jogo';
   // A tela inicial sempre oferece escolha. O parâmetro licenca poderá destacar uma opção futuramente.
   const hintedKind = (url.get('licenca') || '').toLowerCase();
-  const storageKey = 'mco_ps5_integrado_v075_' + (game.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').slice(0,45) || 'jogo');
+  const storageKey = 'mco_ps5_integrado_v076_' + (game.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').slice(0,45) || 'jogo');
   let current = 0, currentAction = 0, shareState = 'normal';
   let mode = 'primary';
   let secondaryShareState = 'enabled';

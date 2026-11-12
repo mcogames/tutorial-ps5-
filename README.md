@@ -1,4 +1,4 @@
-# MCO GAMES — Tutorial Interativo PS5 v0.7.5
+# MCO GAMES — Tutorial Interativo PS5 v0.7.6
 
 Três fluxos em uma página independente para GitHub Pages:
 
@@ -55,3 +55,13 @@ A etapa **Desativar compartilhamento** mostra diretamente o fluxo padrão do PS5
 - Logo horizontal de 2025 na abertura, símbolo quadrado de 2026 no cabeçalho/favicon.
 - Ambos os PNGs originais são preservados em `assets/`. A inversão monocromática no CSS permite contraste no fundo escuro.
 - Quando recebido pelo URL, o nome do jogo aparece discretamente na abertura.
+
+
+## Publicação sem arquivos antigos (v0.7.6)
+1. **Extraia o ZIP** no computador. Faça upload dos arquivos **da raiz** (`index.html`, `app.js`, `styles.css`, `assets/`, etc.) para a raiz do repositório, substituindo os existentes. Não envie somente o ZIP nem a pasta contendo o projeto.
+2. No GitHub, em **Code**, confirme que o `index.html` mostra `<meta name="mco-build" content="0.7.6" />` e que a importação é `app.js?v=0.7.6`.
+3. Em **Settings > Pages**, confirme a fonte de publicação: branch `main`, pasta `/ (root)` (se seu Pages usa branch). Em **Actions**, acompanhe a execução da publicação.
+4. Abra `https://mcogames.github.io/tutorial-ps5-/?v=0.7.6` e faça recarregamento forçado (`Ctrl+Shift+R`) se necessário.
+5. No modo **SECUNDÁRIA**, etapa **13/19**, confirme título **Desativar compartilhamento**, o botão **Desativar**, depois **OK**. Não existe seletor de estado nessa etapa; a ajuda é oferecida em **Minha tela está diferente**.
+
+A versão 0.7.6 não muda os roteiros: apenas impede o navegador de reutilizar o CSS/JavaScript antigo após a atualização e adiciona um identificador técnico invisível da versão.

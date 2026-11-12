@@ -1,0 +1,10 @@
+MCO GAMES — ATUALIZAÇÃO v0.7.6 (ATENÇÃO À VERSÃO ANTIGA)
+
+1. Extraia o ZIP. Os arquivos index.html, app.js e styles.css e a pasta assets precisam ir diretamente na RAIZ do repositório tutorial-ps5-. Não faça upload do ZIP sem extrair.
+2. No GitHub, abra Code > Add file > Upload files, selecione os arquivos extraídos e substitua os existentes. Faça o Commit na branch main.
+3. Confira em Code que o arquivo index.html contém mco-build 0.7.6 e a linha app.js?v=0.7.6. Se não encontrar, a atualização não chegou à branch correta.
+4. Em Settings > Pages, confira a fonte de publicação. Se for main / (root), aguarde a execução concluída em Actions. Se a publicação usar outra branch/pasta, envie os arquivos para a origem correta.
+5. Abra https://mcogames.github.io/tutorial-ps5-/?v=0.7.6 e use Ctrl+Shift+R. Teste Secundária > Etapas > 13/19.
+6. Resultado esperado: título 'Desativar compartilhamento', tela com botão 'Desativar' e depois 'OK'; sem menu suspenso de três opções.
+
+O HTML de prévia acompanha o ZIP separadamente no chat e pode ser aberto localmente para comparar. A atualização do GitHub deve ser feita pelo usuário.

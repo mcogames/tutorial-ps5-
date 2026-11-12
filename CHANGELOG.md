@@ -1,3 +1,9 @@
+## v0.7.6 — Publicação com atualização forçada
+- Acrescentados identificadores de versão aos links de `styles.css`, `app.js` e favicon para reduzir uso de cache antigo.
+- Inserida a marca técnica invisível `<meta name="mco-build" content="0.7.6">` para conferir a publicação no GitHub.
+- Mantido o fluxo **Secundária**: etapa 13 com **Desativar → OK**, sem seletor de estado; ajuda separada em **Minha tela está diferente**.
+- Documentado procedimento de substituição dos arquivos na raiz do repositório.
+
 # Histórico de versões
 
 ## v0.7.5 — Central de Instalação e Suporte
