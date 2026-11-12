@@ -1,20 +1,95 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#06111f"><meta name="description" content="MCO GAMES · Tutorial visual interativo de configuração do PS5, fluxo primário.">
-<title>MCO GAMES — Tutorial PS5 Primária</title><link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#061321" />
+  <meta name="description" content="Guia de instalação PS5 da MCO GAMES — acompanhe o passo a passo para instalar seu jogo." />
+  <title>MCO GAMES — Instalação PS5</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header class="site-header"><a class="brand" href="#inicio" aria-label="MCO GAMES, voltar ao início"><span class="brand-mark"><svg viewBox="0 0 44 44" width="29" height="29" aria-hidden="true"><rect x="2" y="2" width="40" height="40" rx="13" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M12 22h13m-6.5-6.5v13M31 16h.1M34 23h.1" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></svg></span><span>MCO <b>GAMES</b></span></a><span class="header-caption"><span class="live-dot"></span> ASSISTENTE VISUAL / PS5</span><span class="header-version">PRIMÁRIA · V0.4</span></header>
-<main id="inicio">
-<section id="welcome" class="welcome" aria-labelledby="welcomeTitle"><div class="welcome-orbit one"></div><div class="welcome-orbit two"></div><div class="welcome-content"><div class="welcome-star">✦</div><div class="welcome-pill">MCO GAMES · SEJA BEM-VINDO</div><h1 id="welcomeTitle">Parabéns pela compra do <em id="gameWelcome">seu jogo</em>!</h1><p>Siga o tutorial abaixo para concluir a instalação no seu PS5.</p><button id="start" class="btn btn-primary btn-xl">Começar agora <span>→</span></button></div><div class="welcome-visual" aria-hidden="true"><div class="visual-beam"></div><div class="ps5-illustration"><span class="ps-side left"></span><span class="ps-center"></span><span class="ps-side right"></span></div><div class="visual-controller"><span class="ctrl-left">✚</span><span class="ctrl-center">⌂</span><span class="ctrl-right">✦</span></div><div class="visual-chip">PS5 <b>GUIDED SETUP</b></div></div></section>
-<section id="guide" class="guide hidden" aria-label="Assistente de instalação"><div class="guide-heading"><div><span class="eyebrow">ORIENTAÇÃO PASSO A PASSO</span><h1>Configurando seu <em>PS5</em></h1><p id="gameSubtitle">Jogo: seu jogo</p></div><div class="guide-actions"><button id="restart" class="btn btn-secondary btn-small">↻ Reiniciar</button></div></div><div class="progress-meta"><span id="progressText">Tela 1 de 17</span><span id="progressPct">0%</span></div><div class="progress-track"><span id="progressFill"></span></div>
-<div class="guide-layout"><aside class="step-sidebar"><div class="side-title">SEU ROTEIRO <span id="stepCounter"></span></div><nav id="stepNavigation" aria-label="Navegar entre telas"></nav></aside>
-<div class="stage-col"><article class="screen-panel"><div class="scene-meta"><span id="sceneIndex">TELA 01</span><span class="scene-authentic">RECRIAÇÃO VISUAL BASEADA NOS PRINTS DO PS5</span></div><h2 id="sceneTitle">Adicionar usuário</h2><p id="sceneLead">Siga a orientação indicada na tela.</p><div class="screen-shell"><div id="sceneRoot" class="scene-root" role="img" aria-label="Recriação ilustrativa da tela do PS5"></div><div class="scene-bottom"><span id="sceneSource">Tela reconstruída a partir dos prints enviados</span><button id="zoom" class="text-control" aria-label="Ampliar tela do PS5">⤢ Ampliar</button></div></div><div class="instruction-banner"><div class="instruction-icon">✦</div><div><span id="actionCount">AÇÃO 1/1</span><strong id="actionText">Selecione a opção destacada.</strong></div></div><div class="step-action-controls"><button id="prevAction" class="btn btn-ghost" type="button">← Indicação anterior</button><div id="actionDots" class="action-dots"></div><button id="nextAction" class="btn btn-ghost" type="button">Próxima indicação →</button></div><div class="lesson-nav"><button id="backStep" class="btn btn-secondary">← Tela anterior</button><button id="nextStep" class="btn btn-primary">Próxima tela →</button></div></article></div>
-<aside class="assist-panel"><div class="assistant-title"><div class="assistant-avatar">M</div><div><b>Assistente MCO</b><small>Orientação visual</small></div><span class="assist-spark">✦</span></div><div class="assist-heading">O QUE FAZER AGORA</div><div id="directions" class="directions"></div><div id="warning" class="warning"></div><div id="extraOptions" class="extra-options"></div><button id="help" class="btn btn-outline btn-full">Preciso de ajuda</button><p class="privacy">Não informe senhas ou códigos de autenticação neste site.</p></aside></div>
-<footer class="footnote">“Primária” é uma designação comercial. No PS5, a configuração oficial é “Compartilhamento do console e jogo offline”. As imagens do console são reconstruções orientativas; as opções reais podem variar conforme a versão do sistema.</footer></section>
-</main>
-<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-panel"><button id="modalClose" class="modal-close" aria-label="Fechar">✕</button><h2 id="modalTitle">Ajuda</h2><div id="modalContent"></div><button id="modalConfirm" class="btn btn-primary">Entendi</button></div></div>
-<div id="zoomModal" class="zoom-modal hidden" role="dialog" aria-modal="true" aria-label="Visualização ampliada"><div class="zoom-bar"><strong>Tela ampliada — PS5</strong><button id="zoomClose" class="btn btn-secondary btn-small">Fechar ✕</button></div><div id="zoomContent"></div></div>
-<script src="app.js" defer></script></body></html>
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="MCO GAMES — início">
+      <img src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
+    </a>
+    <span class="header-caption">Instalação PS5</span>
+    <button id="helpTop" class="header-help" type="button" aria-label="Abrir ajuda">Ajuda <span>?</span></button>
+  </header>
+  <main id="inicio">
+    <section id="welcome" class="welcome" aria-labelledby="welcomeTitle">
+      <div class="welcome-glow" aria-hidden="true"></div>
+      <div class="welcome-content">
+        <img class="welcome-logo" src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
+        <h1 id="welcomeTitle">Parabéns pela compra do <em id="gameWelcome">seu jogo</em>!</h1>
+        <p>Siga o tutorial abaixo para concluir a instalação no seu PS5.</p>
+        <button id="start" type="button" class="btn btn-primary btn-xl">Começar agora <span>→</span></button>
+      </div>
+      <div class="welcome-visual" aria-hidden="true">
+        <div class="welcome-halo"></div><div class="ps5-illustration"><span class="ps-side left"></span><span class="ps-center"></span><span class="ps-side right"></span></div>
+        <div class="visual-controller"><span>✚</span><span class="ctrl-center">⌂</span><span>✧</span></div>
+      </div>
+    </section>
+
+    <section id="guide" class="guide hidden" aria-label="Tutorial de instalação">
+      <div class="guide-heading">
+        <div class="guide-identification">
+          <span id="gameSubtitle">Seu jogo</span><span class="small-dot">·</span><span id="progressText">Etapa 1 de 21</span>
+        </div>
+        <div class="guide-actions">
+          <button type="button" id="stepsToggle" class="icon-label-button" aria-expanded="false" aria-controls="stepSidebar">Etapas</button>
+          <button type="button" id="pauseAuto" class="icon-label-button" aria-pressed="false">❚❚ Pausar</button>
+          <button type="button" id="restart" class="icon-label-button restart-button" aria-label="Reiniciar tutorial">↻</button>
+        </div>
+      </div>
+      <div class="progress-track" aria-label="Progresso do tutorial"><span id="progressFill"></span></div>
+      <div class="guide-layout">
+        <aside id="stepSidebar" class="step-sidebar" aria-label="Todas as etapas">
+          <div class="side-title">Todas as etapas <button id="closeSteps" type="button" aria-label="Fechar etapas">✕</button></div>
+          <nav id="stepNavigation" aria-label="Ir para uma etapa"></nav>
+        </aside>
+        <div id="sidebarShade" class="sidebar-shade hidden"></div>
+        <section class="stage-col">
+          <article class="screen-panel">
+            <div class="scene-head">
+              <h2 id="sceneTitle">Adicionar usuário</h2>
+              <span id="sceneIndex" class="scene-index">1/21</span>
+            </div>
+            <p id="sceneLead" class="visually-hidden">Siga a orientação indicada.</p>
+            <div class="screen-shell">
+              <div id="sceneRoot" class="scene-root" role="img" aria-label="Representação orientativa da interface do PS5"></div>
+              <button id="zoom" type="button" class="zoom-control" aria-label="Ampliar tela do PS5">⤢ Ampliar tela</button>
+            </div>
+            <div class="instruction-banner" aria-live="polite">
+              <div class="instruction-icon" aria-hidden="true">➜</div>
+              <div class="instruction-copy"><span id="actionCount">Indicação 1 de 1</span><strong id="actionText">Selecione a opção indicada.</strong></div>
+              <span id="repeatCount" class="repeat-count" aria-label="Repetição atual">1/2</span>
+            </div>
+            <div id="extraOptions" class="extra-options"></div>
+            <div id="warning" class="warning" role="note"></div>
+            <div id="directions" class="directions hidden"></div>
+            <div class="navigation-row">
+              <button type="button" id="prevAction" class="small-action" title="Indicação anterior" aria-label="Indicação anterior">‹</button>
+              <div class="action-dots" id="actionDots" aria-hidden="true"></div>
+              <button type="button" id="nextAction" class="small-action" title="Próxima indicação" aria-label="Próxima indicação">›</button>
+              <span class="nav-divider"></span>
+              <button type="button" id="backStep" class="btn btn-secondary nav-step">← <span>Anterior</span></button>
+              <button type="button" id="nextStep" class="btn btn-primary nav-step"><span>Próxima tela</span> →</button>
+            </div>
+          </article>
+        </section>
+      </div>
+      <span id="progressPct" class="visually-hidden">0%</span>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-panel"><button id="modalClose" type="button" class="modal-close" aria-label="Fechar">✕</button><h2 id="modalTitle">Ajuda</h2><div id="modalContent"></div><button id="modalConfirm" type="button" class="btn btn-primary">Entendi</button></div>
+  </div>
+  <div id="zoomModal" class="zoom-modal hidden" role="dialog" aria-modal="true" aria-label="Tela do PS5 ampliada">
+    <div class="zoom-bar"><strong>Tela do PS5</strong><button id="zoomClose" type="button" class="btn btn-secondary btn-small">Fechar ✕</button></div>
+    <div id="zoomContent"></div>
+  </div>
+  <script src="app.js" defer></script>
+</body>
+</html>

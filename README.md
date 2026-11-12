@@ -1,50 +1,52 @@
-# MCO GAMES — Tutorial Interativo PS5 Primária v0.4
+# MCO GAMES · Guia PS5 — versão de testes v0.5
 
-## O que é
-Site estático e independente para orientar o cliente em **21 telas ilustrativas**, baseadas nas capturas de tela do PS5 fornecidas pelo projeto. O fluxo é **somente primário**. A versão secundária fica para uma revisão futura.
+Protótipo independente para testar o tutorial de instalação **primária**. Não está integrado à loja nem ao NEXUS.
 
-### Recursos
-- Boas-vindas com **nome do jogo dinâmico** (`?jogo=Nome%20do%20Jogo`).
-- Logo textual MCO GAMES, aparência escura com neon ciano.
-- **Seta em movimento**: aparece, percorre a trajetória até a opção, desaparece e recomeça em loop, com contorno neon pulsante no botão ou elemento destacado.
-- Animações sequenciais dentro da mesma tela: `Concordo → Confirmar`, `e-mail → senha → Iniciar sessão`, `código 2FA → OK`.
-- Botões **Indicação anterior / Próxima indicação**; ciclos automáticos a cada ~6,5 s quando houver mais de uma indicação.
-- Tela opcional de proteção de conta e de telas intermediárias pós-login.
-- Tratamento dos estados de compartilhamento (desabilitado, já habilitado ou aviso sobre outro PS5).
-- **Bloqueio de avanço** se o usuário informar aviso de ativação em outro PS5.
-- Biblioteca → Sua coleção → seleção do jogo → botão Baixar (reconstrução ilustrativa).
-- Fazer logout, selecionar perfil pessoal e tela final.
-- Modal de solução de problemas com links oficiais da Sony; ampliação da tela para celular.
-- Salva progresso por nome do jogo em `localStorage` somente; não solicita nem armazena credenciais nem 2FA.
+## Novidades nesta versão
 
-## Publicar no GitHub Pages
-Se o repositório do tutorial é **mcogames/tutorial-ps5-**:
+- Logo oficial `assets/mco-logo-oficial.png` incorporada sem mudar seu desenho, exibida em branco sobre fundo escuro.
+- Interface simplificada para o cliente: título, desenho do PS5, orientação do momento e navegação. Recursos de suporte ficam em `Ajuda`.
+- Tutorial **automático** a partir de `Começar agora`: cada indicação é apresentada em **2 ciclos completos**, depois o tutorial muda sozinho para a indicação seguinte ou para a próxima tela.
+- Movimento da seta e revelação de sua trilha **sincronizados, no mesmo quadro de animação** (`requestAnimationFrame`). O foco neon pulsa ao chegar no botão.
+- Controles manuais: `Pausar/Continuar`, `Anterior/Próxima tela`, `‹/›` para alternar indicações e `Etapas` para navegar diretamente.
+- Layout ajustado ao espaço visível do navegador (desktop/mobile). A página principal não exige rolagem; a lista de etapas e as caixas de ajuda possuem rolagem própria quando necessário.
+- Textos de login personalizados para os dados que a pessoa recebeu da MCO GAMES.
+- Ícone da biblioteca reconstruído com a grade e o controle visualmente próximos do desenho real do PS5 (não é uma imagem oficial).
+- Biblioteca com orientação de selecionar o jogo adquirido e nome dinâmico na capa ilustrativa.
+- Tela de finalização enxuta.
 
-1. Extraia o ZIP.
-2. No GitHub, abra o repositório e acesse a **raiz** da branch `main`.
-3. Clique em **Add file → Upload files**.
-4. Envie **index.html**, **styles.css**, **app.js** e a documentação `.md` diretamente para a raiz (não crie uma pasta extra).
-5. Confirme com **Commit changes**.
-6. Confira em **Settings → Pages** se está configurado como `Deploy from a branch`, branch `main`, folder `/(root)`.
-7. Aguarde a execução `pages build and deployment` aparecer como concluída em **Actions**.
+## Testar
 
-URL esperada, após publicação:
+Abra `index.html` no navegador. Exemplo de link para informar o jogo:
+
+`index.html?jogo=EA%20Sports%20FC%2026&licenca=primaria`
+
+O nome é apresentado na mensagem inicial e nas instruções de seleção. **Atenção:** o nome não faz download, compra ou ativação; este é um tutorial visual.
+
+Para uma prévia sem necessidade de pasta, abra `MCO_PS5_PRIMARIA_PREVIEW_v0.5.html`, fornecido separadamente do ZIP.
+
+## Publicação no GitHub Pages
+
+No repositório `mcogames/tutorial-ps5-`, raiz de `main`:
+
+1. Substitua `index.html`, `styles.css` e `app.js` pelos arquivos desta versão.
+2. Acrescente a pasta **`assets`** com o arquivo **`mco-logo-oficial.png`** sem mudar o nome ou caminho.
+3. Faça o commit e aguarde o GitHub Pages terminar a publicação em `Actions`.
+4. Abra o endereço publicado, preferencialmente em guia anônima ou com atualização forçada para evitar cache.
+
+URL exemplo (quando GitHub Pages estiver ativado):
 
 `https://mcogames.github.io/tutorial-ps5-/?jogo=EA%20Sports%20FC%2026&licenca=primaria`
 
-Se o nome do repositório mudar, ajuste o endereço. **Não é preciso editar o site da loja nem o NEXUS nesta etapa.**
+**O NEXUS e o site principal permanecem intocados.**
 
-## Teste local
-Abra `index.html` no navegador. Se o progresso não funcionar em `file://`, teste com um servidor local simples (por exemplo: `python -m http.server`).
+## Observações técnicas e segurança
 
-## Limitações e transparência
-- As telas principais **são reconstruções visuais**, inspiradas nos prints reais disponibilizados, sem reproduzir setas amarelas, avatares pessoais nem propagandas. **Não são screenshots oficiais nem correspondência pixel a pixel.**
-- As telas **Proteção da conta**, **Configurações adicionais** e **Baixar o jogo** são exemplos didáticos, pois não constavam claramente nos prints disponibilizados.
-- A nomenclatura comercial “primária” não constitui licença oficial transferível da Sony.
-- O compartilhamento do console só pode ficar habilitado em um PS5 por conta.
-- O NEXUS ainda **não foi integrado**. O parâmetro `?jogo=` simula o nome que será enviado pelo sistema.
-
-## Fontes oficiais usadas para conferir os procedimentos
-- [Compartilhamento do console e jogo offline](https://www.playstation.com/pt-br/support/account/ps5-console-sharing-offline-play/)
-- [Restaurar licenças](https://www.playstation.com/pt-br/support/games/restore-licences-playstation/)
-- [Baixar jogos](https://www.playstation.com/pt-br/support/games/find-download-games-ps-store/)
+- Há 21 etapas e algumas são reconstruções ilustrativas. O roteiro foi inspirado nas capturas enviadas, mas **não é a interface oficial do sistema nem uma captura exata**.
+- As telas opcionais após o login e o botão de download são demonstrações adicionais; podem aparecer de forma diferente ou não aparecer em certas versões do PS5.
+- A reprodução automática **apenas muda as orientações no navegador**. Ela NÃO executa comandos no console; o cliente precisa executar as ações no PS5. É possível pausar a qualquer momento.
+- No aviso de compartilhamento em outro PS5, o avanço automático para e a orientação é procurar o titular/suporte antes de alterar a ativação.
+- O site não coleta senha, e-mail nem códigos 2FA. O progresso local salvo em `localStorage` contém apenas o índice da etapa.
+- “Primária” é nomenclatura comercial, não uma licença oficial transferível Sony; os recursos de compartilhamento estão sujeitos às regras da plataforma.
+- A documentação oficial pode ser consultada nos links da janela `Ajuda`.
+- Esta versão inclui exclusivamente o fluxo primário. O secundário terá seu próprio tratamento posterior.
