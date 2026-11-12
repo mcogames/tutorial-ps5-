@@ -1,10 +1,22 @@
-MCO GAMES — ATUALIZAÇÃO v0.7.6 (ATENÇÃO À VERSÃO ANTIGA)
+MCO GAMES — Correção das logos no GitHub Pages (v0.7.9)
 
-1. Extraia o ZIP. Os arquivos index.html, app.js e styles.css e a pasta assets precisam ir diretamente na RAIZ do repositório tutorial-ps5-. Não faça upload do ZIP sem extrair.
-2. No GitHub, abra Code > Add file > Upload files, selecione os arquivos extraídos e substitua os existentes. Faça o Commit na branch main.
-3. Confira em Code que o arquivo index.html contém mco-build 0.7.6 e a linha app.js?v=0.7.6. Se não encontrar, a atualização não chegou à branch correta.
-4. Em Settings > Pages, confira a fonte de publicação. Se for main / (root), aguarde a execução concluída em Actions. Se a publicação usar outra branch/pasta, envie os arquivos para a origem correta.
-5. Abra https://mcogames.github.io/tutorial-ps5-/?v=0.7.6 e use Ctrl+Shift+R. Teste Secundária > Etapas > 13/19.
-6. Resultado esperado: título 'Desativar compartilhamento', tela com botão 'Desativar' e depois 'OK'; sem menu suspenso de três opções.
+IMPORTANTE: O ZIP contém os arquivos na RAIZ, sem pastas internas.
 
-O HTML de prévia acompanha o ZIP separadamente no chat e pode ser aberto localmente para comparar. A atualização do GitHub deve ser feita pelo usuário.
+1. Extraia o ZIP no seu computador.
+2. No GitHub, repositório mcogames/tutorial-ps5-, branch main, clique Add file > Upload files.
+3. Arraste TODOS os 4 arquivos DIRETAMENTE para a raiz do repositório (na mesma página do index.html):
+   index.html
+   logo-mco-principal.png
+   logo-mco-simbolo.png
+   favicon-mco.png
+4. Confirme o commit.
+5. Em Code, confira que os três arquivos PNG aparecem junto de index.html.
+6. Em Actions, aguarde a conclusão bem-sucedida de pages build and deployment.
+7. Abra https://mcogames.github.io/tutorial-ps5-/?v=0.7.9 e recarregue com Ctrl+Shift+R.
+8. Para testar cada imagem individualmente, abra:
+   https://mcogames.github.io/tutorial-ps5-/logo-mco-principal.png
+   https://mcogames.github.io/tutorial-ps5-/logo-mco-simbolo.png
+
+Causa provável do problema anterior: ausência das imagens publicadas no GitHub ou versão diferente da servida no Pages.
+O HTML desta versão usa caminhos relativos simples (./nome.png), sem dependência de data URIs extensas nem pasta assets.
+Aproveitamos o HTML da v0.7.8 e preservamos os roteiros Primária, Secundária e Cadeado.
