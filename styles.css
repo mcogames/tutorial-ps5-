@@ -71,3 +71,82 @@ main{height:calc(100dvh - 66px);min-height:0;overflow:hidden;display:flex;flex-d
  .mode-card-info strong{font-size:14px}.mode-card-info small{font-size:10px}
  .welcome-tip{font-size:9px}
 }
+
+
+/* v0.7.1 — Ação de suporte somente no aviso de ativação em outro PS5. */
+.extra-options .support-whatsapp,
+.modal-panel .support-whatsapp{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px;flex:0 0 auto;padding:8px 13px;border-radius:10px;border:1px solid #31e6ba;background:linear-gradient(115deg,#0b4c44,#096a56);color:#effffb;font-size:12px;font-weight:800;line-height:1.2;text-decoration:none;box-shadow:0 0 15px rgba(24,210,153,.15);white-space:nowrap;transition:box-shadow .2s,transform .2s}
+.extra-options .support-whatsapp:hover,
+.modal-panel .support-whatsapp:hover{box-shadow:0 0 22px rgba(24,210,153,.4);transform:translateY(-1px)}
+.extra-options .support-whatsapp:focus-visible,
+.modal-panel .support-whatsapp:focus-visible{outline:3px solid #b3fff0;outline-offset:2px}
+@media(max-width:700px){.extra-options .support-whatsapp{flex:1 1 100%;width:100%;min-height:35px;padding:7px 10px;font-size:11px}}
+@media(max-height:650px) and (min-width:701px){.extra-options .support-whatsapp{min-height:33px;padding:6px 9px;font-size:11px}}
+
+/* v0.7.3 — etapa secundária direta + ajuda opcional */
+.extra-options .secondary-trouble{border:1px solid rgba(45,218,250,.6);border-radius:9px;background:#10304a;color:#e2f9ff;min-height:37px;padding:8px 14px;font-size:12px;font-weight:800;cursor:pointer;white-space:nowrap}
+.extra-options .secondary-trouble:hover{background:#184a67;box-shadow:0 0 12px rgba(41,216,250,.18)}
+.secondary-help-choices{display:grid;gap:9px;margin:14px 0}
+.secondary-help-choice{background:#112f49;border:1px solid #3a7a99;border-radius:10px;color:#effbff;text-align:left;padding:12px 14px;font-size:13px;font-weight:750;cursor:pointer}
+.secondary-help-choice:hover{background:#174761;border-color:#4ae7ff}
+@media(max-width:760px){.extra-options .secondary-trouble{width:100%;font-size:11px;min-height:33px;padding:6px 10px}}
+
+
+/* v0.7.5 — identidade oficial das duas marcas e nova entrada profissional */
+.brand{gap:10px;text-decoration:none;min-width:0}
+.brand-icon{width:41px;height:41px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(155deg,rgba(21,69,93,.9),rgba(9,29,46,.9));border:1px solid #2b7189;box-shadow:0 0 18px #08bde814;overflow:hidden;flex:0 0 41px}
+.brand-icon img{width:35px;height:35px;max-width:none;object-fit:contain;filter:brightness(0) invert(1)}
+.brand-name{font-weight:900;letter-spacing:-.035em;white-space:nowrap;color:#fff;font-size:clamp(15px,1.5vw,20px)}
+.brand-name b{color:var(--cyan);font-weight:900;letter-spacing:-.035em}
+.site-header .header-caption{letter-spacing:.12em}
+.welcome.welcome-choices{max-width:1300px}
+.welcome-glow{border-color:rgba(15,210,255,.10);background:radial-gradient(ellipse at center,rgba(14,95,148,.09),transparent 68%)}
+.welcome-choices .welcome-logo{height:clamp(75px,14vh,141px);max-width:min(435px,76vw);width:auto;object-fit:contain;margin:0 0 clamp(2px,1vh,12px);filter:brightness(0) invert(1) drop-shadow(0 0 14px rgba(64,211,245,.15))}
+.welcome-choices .welcome-eyebrow{letter-spacing:.14em;color:#63dff6;font-size:clamp(9px,1vw,11px)}
+.welcome-choices h1{font-size:clamp(27px,3vw,44px);margin:8px 0 9px;max-width:940px;letter-spacing:-.03em}
+.welcome-choices h1 em{color:#5feaff}
+.welcome-choices p{font-size:clamp(12px,1.25vw,16px);margin:0 0 clamp(9px,2vh,18px);max-width:630px}
+.game-context{background:#092b40;border:1px solid rgba(36,195,237,.3);border-radius:20px;max-width:min(85%,660px);color:#a0bfd0;font-size:11px;padding:6px 14px;margin:-2px 0 15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.game-context[hidden]{display:none}
+.game-context strong{color:#e3faff;font-weight:800}
+.mode-options{margin-bottom:clamp(6px,1.4vh,15px)}
+.mode-card{min-height:clamp(148px,21vh,190px);border-color:#2b526a;border-radius:16px;background:linear-gradient(150deg,#0c3146,#081b2d);gap:13px;transition:transform .18s,border-color .18s,box-shadow .18s}
+.mode-card:hover{transform:translateY(-2px)}
+.mode-card:focus-visible{outline:3px solid #78efff;outline-offset:2px}
+.mode-card-info strong{font-size:clamp(15px,1.5vw,21px)}
+.mode-card-info small{font-size:clamp(11px,1vw,13px)}
+.mode-card-icon{border-color:#2c819f;background:#0f4159;color:#45eeff}
+.mode-card-arrow{font-size:23px}
+.welcome-tip{color:#9bb7c5}
+.welcome-tip span{color:var(--cyan);margin-right:5px}
+@media(max-width:700px){
+ .brand-icon{width:36px;height:36px;flex-basis:36px;border-radius:10px}
+ .brand-icon img{width:31px;height:31px}
+ .brand-name{font-size:15px}
+ .welcome.welcome-choices{padding:8px 15px}
+ .welcome-choices .welcome-logo{height:clamp(62px,11vh,102px);max-width:min(300px,76vw);margin-bottom:3px}
+ .welcome-choices h1{font-size:clamp(24px,5vw,31px);margin:7px 0 8px}
+ .welcome-choices p{font-size:12px;margin-bottom:11px;line-height:1.38}
+ .game-context{font-size:10px;margin:0 0 10px;padding:5px 12px}
+ .mode-card{min-height:clamp(74px,12vh,94px);gap:11px;padding:9px 13px}
+ .mode-card-icon{width:45px;height:45px;flex-basis:45px}
+ .mode-card-info strong{font-size:14px}
+ .mode-card-info small{font-size:10px}
+ .welcome-tip{font-size:9.5px;line-height:1.35}
+}
+@media(max-width:390px) and (max-height:700px){
+ .site-header{height:58px}
+ main{height:calc(100dvh - 58px)}
+ .brand{gap:7px}.brand-name{font-size:13px}
+ .welcome-choices .welcome-logo{height:clamp(50px,9vh,62px);margin-bottom:1px}
+ .welcome-choices .welcome-eyebrow{font-size:8px}
+ .welcome-choices h1{font-size:23px;line-height:1.07;margin:5px 0 6px}
+ .welcome-choices p{font-size:11px;margin:0 0 8px}
+ .game-context{font-size:9px;padding:4px 10px;margin-bottom:7px}
+ .mode-options{gap:6px;margin-bottom:7px}
+ .mode-card{min-height:67px;padding:8px 10px}
+ .mode-card-icon{width:40px;height:40px;flex-basis:40px}
+ .mode-card-info strong{font-size:13px}
+ .mode-card-info small{font-size:10px}
+ .welcome-tip{font-size:8px}
+}

@@ -4,14 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#061321" />
-  <meta name="description" content="Guia de instalação PS5 da MCO GAMES — acompanhe o passo a passo para instalar seu jogo." />
-  <title>MCO GAMES — Instalação PS5</title>
+  <meta name="description" content="MCO GAMES — tutoriais interativos para instalação de jogos e suporte no PS5." />
+  <title>MCO GAMES — Central de Instalação e Suporte PS5</title>
+  <link rel="icon" type="image/png" href="assets/mco-favicon.png" />
+  <link rel="apple-touch-icon" href="assets/mco-favicon.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header class="site-header">
     <a class="brand" href="#inicio" aria-label="MCO GAMES — início">
-      <img src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
+      <span class="brand-icon"><img src="assets/mco-logo-simbolo.png" alt="" /></span>
+      <span class="brand-name">MCO <b>GAMES</b></span>
     </a>
     <span class="header-caption">Instalação PS5</span>
     <div class="header-tools">
@@ -23,10 +26,11 @@
     <section id="welcome" class="welcome welcome-choices" aria-labelledby="welcomeTitle">
       <div class="welcome-glow" aria-hidden="true"></div>
       <div class="choice-content">
-        <img class="welcome-logo" src="assets/mco-logo-oficial.png" alt="MCO GAMES" />
-        <span class="welcome-eyebrow">SEU GUIA PS5</span>
-        <h1 id="welcomeTitle">Parabéns pela compra do <em id="gameWelcome">seu jogo</em>!</h1>
-        <p>Escolha como podemos ajudar você:</p>
+        <img class="welcome-logo" src="assets/mco-logo-horizontal.png" alt="MCO GAMES" />
+        <span class="welcome-eyebrow">CENTRAL DE ATENDIMENTO • PLAYSTATION 5</span>
+        <h1 id="welcomeTitle">Central de Instalação <em>e Suporte</em></h1>
+        <p>Escolha a orientação que você precisa para configurar seu jogo no PS5.</p>
+        <div id="gameContext" class="game-context" hidden>Jogo: <strong id="gameWelcome">seu jogo</strong></div>
         <div class="mode-options" role="group" aria-label="Escolha seu tutorial">
           <button id="choosePrimary" type="button" class="mode-card primary-card">
             <span class="mode-card-icon" aria-hidden="true">◈</span>
@@ -44,7 +48,7 @@
             <span class="mode-card-arrow" aria-hidden="true">→</span>
           </button>
         </div>
-        <div class="welcome-tip">As orientações são para PS5. Você realiza cada ação no próprio console.</div>
+        <div class="welcome-tip"><span aria-hidden="true">✦</span> Passo a passo interativo, simples e seguro. As ações são realizadas no seu PS5.</div>
       </div>
     </section>
 

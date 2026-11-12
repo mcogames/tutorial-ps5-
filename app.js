@@ -5,11 +5,11 @@
   const game = (url.get('jogo') || url.get('game') || 'seu jogo').trim().slice(0,90) || 'seu jogo';
   // A tela inicial sempre oferece escolha. O parâmetro licenca poderá destacar uma opção futuramente.
   const hintedKind = (url.get('licenca') || '').toLowerCase();
-  const storageKey = 'mco_ps5_integrado_v07_' + (game.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').slice(0,45) || 'jogo');
+  const storageKey = 'mco_ps5_integrado_v075_' + (game.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').slice(0,45) || 'jogo');
   let current = 0, currentAction = 0, shareState = 'normal';
   let mode = 'primary';
-  let secondaryShareState = 'ask';
-  let lockShareState = 'ask';
+  let secondaryShareState = 'enabled';
+  let lockShareState = 'disabled';
   const modePosition = {primary:0, secondary:0, lock:0};
   const modeAction = {primary:0, secondary:0, lock:0};
   // Uma indicação é composta de duas reproduções sincronizadas da seta + trilha.
@@ -32,9 +32,22 @@
   if(Number.isInteger(history.current) && history.current >= 0) current = history.current;
   if(['lock','primary','secondary'].includes(history.mode)) mode = history.mode;
   for(const m of ['primary','secondary','lock']) if(Number.isInteger(history[m+'Current'])) modePosition[m] = history[m+'Current'];
-  if(['ask','enabled','disabled','conflict'].includes(history.lockShareState)) lockShareState = history.lockShareState;
-  if(['ask','enabled','disabled','conflict'].includes(history.secondaryShareState)) secondaryShareState=history.secondaryShareState;
+  if(['enabled','disabled','conflict'].includes(history.lockShareState)) lockShareState = history.lockShareState;
+  if(['disabled','error'].includes(history.secondaryShareState)) secondaryShareState=history.secondaryShareState;
   const h = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  // Atendimento comercial — exibido somente quando uma ativação exige apoio.
+  // O tutorial não pede nem armazena dados de acesso ou códigos de verificação.
+  const whatsappNumber = '5599981810222';
+  const whatsappMessage = `Olá, MCO GAMES! Estou instalando ${game} no PS5 (primária) e apareceu um aviso de que o compartilhamento está habilitado em outro PS5. Preciso de ajuda para continuar.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+  const conflictSupportLink = () => `<a class="support-whatsapp" href="${whatsappUrl}" target="_blank" rel="noopener noreferrer" aria-label="Pedir ajuda à MCO GAMES pelo WhatsApp, abre nova guia"><span aria-hidden="true">✆</span> Falar com suporte no WhatsApp <span aria-hidden="true">↗</span></a>`;
+  const secondaryHelpMessage = `Olá, MCO GAMES! Preciso de ajuda com a instalação secundária de ${game} no PS5. Não consegui desativar o Compartilhamento do console e jogo offline.`;
+  const secondarySupportUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(secondaryHelpMessage)}`;
+  const secondarySupportLink = () => `<a class="support-whatsapp" href="${secondarySupportUrl}" target="_blank" rel="noopener noreferrer" aria-label="Pedir ajuda com a instalação secundária à MCO GAMES pelo WhatsApp"><span aria-hidden="true">✆</span> Falar com suporte no WhatsApp <span aria-hidden="true">↗</span></a>`;
+  const lockHelpMessage = `Olá, MCO GAMES! Estou no tutorial de cadeado do jogo ${game} no PS5 e apareceu uma tela diferente na etapa de compartilhamento do console e jogo offline. Preciso de ajuda.`;
+  const lockSupportUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(lockHelpMessage)}`;
+  const lockSupportLink = () => `<a class="support-whatsapp" href="${lockSupportUrl}" target="_blank" rel="noopener noreferrer" aria-label="Pedir ajuda com o cadeado do jogo à MCO GAMES pelo WhatsApp"><span aria-hidden="true">✆</span> Falar com suporte no WhatsApp <span aria-hidden="true">↗</span></a>`;
+
   const R = (x,y,w,z,fill='#252338',rx=0,stroke='none',sw=1) => `<rect x="${x}" y="${y}" width="${w}" height="${z}" rx="${rx}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
   const C = (x,y,r,fill='none',stroke='none',sw=1) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
   const L = (x1,y1,x2,y2,stroke='#aaa5ce',sw=2) => `<path d="M${x1} ${y1} L${x2} ${y2}" stroke="${stroke}" stroke-width="${sw}" fill="none"/>`;
@@ -77,7 +90,7 @@
   const screenDownload=()=>`${title('Detalhes do jogo')}${R(160,218,397,485,'url(#coverBG)',10)}${C(356,408,138,'rgba(35,236,233,.12)','#9beaff',6)}${T(355,424,game.length>15?game.slice(0,14)+'…':game,42,'#fff','middle',850)}${T(682,270,game.length>24?game.slice(0,23)+'…':game,54,'#fff','start',720)}${T(682,351,'PS5 · Versão digital',30,'#b9b5d7')}${btn(678,515,525,'Baixar',true,83)}${T(682,636,'Se o jogo estiver instalado, a opção poderá ser “Jogar”.',28,'#b9b4cf')}`;
   const screenProfileMenu = ()=>`${homeTop()}${homeIcons()}${R(1030,106,510,568,'rgba(21,25,48,.94)',10,'#5d5976',1.5)}${T(1093,167,'Perfil',33,'#e6e0f4')}${['Status online','Perfil','Troféus','Alternar usuário','Fazer logout'].map((s,i)=>`${i===3?R(1044,201+i*90,472,82,'rgba(146,142,176,.12)',4,'#a1a1bb',2):''}${T(1090,263+i*88,s,32,'#eeeaf9')}${L(1074,282+i*88,1510,282+i*88,'rgba(171,167,193,.19)',1)}`).join('')}`;
   const screenLogout=()=>`${homeTop()}${homeIcons()}${R(1030,106,510,568,'rgba(21,25,48,.94)',10,'#5d5976',1.5)}${T(1093,167,'Perfil',33,'#e6e0f4')}${['Status online','Perfil','Troféus','Alternar usuário','Fazer logout'].map((s,i)=>`${i===4?R(1044,201+i*90,472,82,'rgba(146,142,176,.15)',4,'#c1badd',3):''}${T(1090,263+i*88,s,32,'#eeeaf9')}${L(1074,282+i*88,1510,282+i*88,'rgba(171,167,193,.19)',1)}`).join('')}`;
-  const screenPersonal=()=>`${title('Quem está usando esse controle?')}${T(800,244,'Selecione seu usuário pessoal',36,'#c1b9d5','middle')}${P(556,454,'Perfil de instalação','M')}${P(1042,454,'Seu usuário pessoal','☺',true)}${T(800,754,'Os nomes e as imagens de perfil podem ser diferentes.',29,'#b8b4cb','middle')}`;
+  const screenPersonal=()=>`${title('Quem está usando esse controle?')}${T(800,244,'Selecione seu usuário pessoal',36,'#c1b9d5','middle')}${P(556,454,'Perfil de instalação','M')}${P(1042,454,'Sua Conta Pessoal','☺',true)}${T(800,754,'Os nomes e as imagens de perfil podem ser diferentes.',29,'#b8b4cb','middle')}`;
   const screenFinish=()=>`${T(800,285,'✓',180,'#54f6ff','middle')}${T(800,414,'Tudo pronto!',75,'#fff','middle',800)}${T(800,503,'Você chegou ao fim do passo a passo.',34,'#d2cde3','middle')}${T(800,562,'Aproveite seu jogo!',35,'#9df7ff','middle',750)}`;
   // Screens for the separate, official-license troubleshooting path. Illustrative UI only.
   const screenLockIntro = () => `${libraryHeader()}${T(145,298,'Todos: 1',30,'#c2b9dd')}${cover()}${R(337,302,103,103,'rgba(6,9,26,.87)',8)}${T(390,379,'🔒',65,'#fff','middle')}${T(560,372,'Jogo com cadeado?',52,'#f4efff')}${lines(560,434,['Vamos conferir a conta, o compartilhamento','e as licenças do jogo no PS5.'],32,'#c6c0dc',56)}`;
@@ -87,14 +100,16 @@
   const screenLockRetry = () => `${libraryHeader()}${T(155,301,'Todos: 1',28,'#bbb3d0')}${cover()}${T(540,423,'Volte ao seu jogo e tente abrir novamente.',36,'#f4eeff')}${T(540,481,'Se ainda houver cadeado, procure ajuda.',30,'#c5beda')}`;
   const screenLockFinish = () => `${T(800,260,'✓',162,'#64edff','middle')}${T(800,408,'Verificação concluída!',67,'#fff','middle',750)}${T(800,508,'Tente abrir seu jogo novamente.',38,'#d6d0e6','middle')}${T(800,569,'Se continuar bloqueado, procure o suporte.',34,'#9deeff','middle')}`;
   const screenLockChoice = () => `${title('Compartilhamento do console e jogo offline')}${T(800,306,'O que aparece na tela do seu PS5?',42,'#fff','middle')}${R(255,396,1090,230,'rgba(183,165,221,.1)',14,'#aea5cd',2)}${lines(800,465,['Selecione abaixo a situação exibida no seu console.','Não mude a ativação de outro PS5 sem autorização do titular.'],31,'#d4cce5',58,'middle')}`;
-  const screenSecondaryAccount=()=>`${title('Usar a conta que possui o jogo')}${T(800,276,'Para esta modalidade, utilize o perfil da conta com acesso ao jogo.',35,'#ece8f8','middle')}${P(545,458,'Sua conta pessoal','☺')}${P(1070,458,'Conta com o jogo','✦',true)}${T(800,727,'Acesso depende da licença e da conexão com a PlayStation Network.',27,'#c7c1df','middle')}`;
+  const screenLockEnabledDone = () => `${title('Compartilhamento do console e jogo offline')}${T(800,430,'Você habilitou [Compartilhamento do console e jogo offline] nesse PS5.',34,'#dfd8e8','middle')}${btn(610,700,380,'OK',true)}`;
+  const screenSecondaryAccount=()=>`${title('Usar a conta que possui o jogo')}${T(800,276,'Para esta modalidade, utilize o perfil da conta com acesso ao jogo.',35,'#ece8f8','middle')}${P(545,458,'Sua Conta Pessoal','☺')}${P(1070,458,'Conta com o jogo','✦',true)}${T(800,727,'Acesso depende da licença e da conexão com a PlayStation Network.',27,'#c7c1df','middle')}`;
   const screenSecondaryFinish=()=>`${T(800,277,'✓',175,'#55eaff','middle')}${T(800,411,'Tudo pronto!',75,'#fff','middle',800)}${T(800,500,'Confira se o download terminou.',34,'#d8d1e8','middle')}${T(800,568,'Abra o jogo no perfil com a licença válida.',31,'#99f3ff','middle')}`;
-  const screenSecondaryStatus=()=> secondaryShareState==='ask' ? screenLockChoice()
-    : secondaryShareState==='enabled'
-      ? `${title('Compartilhamento do console e jogo offline')}${T(800,330,'O compartilhamento já aparece habilitado neste PS5.',32,'#ece7f9','middle')}${T(800,389,'Não altere a configuração sem consultar o titular.',28,'#cfc8e2','middle')}${btn(540,657,520,'Não desativar',true)}`
-      : secondaryShareState==='conflict'
-        ? `${title('Compartilhamento do console e jogo offline')}${lines(250,293,['Há outro PS5 associado ao compartilhamento.','Nesta orientação, não mude a ativação desse console.','Use “Não habilitar” e continue apenas se a conta tiver acesso ao jogo.'],29,'#e3d5f1',78)}${btn(273,677,520,'Não habilitar',true)}${btn(833,677,520,'Habilitar')}`
-        : `${title('Compartilhamento do console e jogo offline')}${T(800,315,'O compartilhamento está desabilitado neste PS5.',33,'#e6deef','middle')}${T(800,389,'Para este caminho, não é necessário habilitá-lo.',29,'#d3c8df','middle')}${btn(540,653,520,'Não habilitar',true)}`;
+  const screenSecondaryEnabled = () => `${title('Compartilhamento do console e jogo offline')}${lines(250,270,['A configuração [Compartilhamento do console e jogo offline] está habilitada','para você nesse PS5.','','Deseja desativar [Compartilhamento do console e jogo offline]? Se fizer isso, nenhum outro','usuário deste PS5 poderá jogar seus jogos e mídias.','','Você pode ter um PS5 com a configuração [Compartilhamento do console e jogo offline]','habilitada. Observe que isso não tem impacto em seu PS4 principal, se você tiver um','configurado.'],29,'#d8d1e6',55)}${btn(370,778,310,'Não desativar')}${btn(860,778,370,'Desativar',true)}`;
+  const screenSecondaryDisabledDone = () => `${title('Compartilhamento do console e jogo offline')}${T(800,430,'Você desativou [Compartilhamento do console e jogo offline] nesse PS5.',34,'#dfd8e8','middle')}${btn(610,700,380,'OK',true)}`;
+  const screenSecondaryStatus=()=> secondaryShareState==='disabled'
+    ? `${title('Compartilhamento do console e jogo offline')}${T(800,300,'Se aparece “Habilitar”, o compartilhamento já está desativado.',34,'#eee8fa','middle')}${T(800,368,'Não selecione “Habilitar”. Você pode continuar o tutorial.',28,'#d3cbe5','middle')}${btn(590,610,420,'Habilitar')}`
+    : secondaryShareState==='error'
+      ? `${title('Compartilhamento do console e jogo offline')}${T(800,320,'Não conseguiu desativar o compartilhamento?',36,'#eee8fa','middle')}${T(800,391,'Entre em contato com o suporte antes de continuar.',30,'#d3cbe5','middle')}${T(800,484,'Use o botão do WhatsApp abaixo da imagem.',27,'#a3efff','middle')}`
+      : (currentAction===1 ? screenSecondaryDisabledDone() : screenSecondaryEnabled());
   const circle = (x,y,r)=>({type:'circle',x,y,r});
   const box=(x,y,w,height,rx=12)=>({type:'rect',x,y,w,h:height,rx});
   const installationSteps = [
@@ -123,7 +138,7 @@
   // Fluxo secundário: a conta deve ter direito de uso do jogo; não ativa compartilhamento neste roteiro.
   const secondarySteps = [
     ...installationSteps.slice(0,12),
-    {id:'sec-ativacao',name:'Conferir compartilhamento',lead:'Vamos conferir o estado da opção, sem alterar a ativação de outro console.',render:screenSecondaryStatus,actions:[],todo:[],note:'Você não precisa habilitar o compartilhamento neste caminho. Não desative uma configuração existente sem autorização do titular.',state:'secondary'},
+    {id:'sec-ativacao',name:'Desativar compartilhamento',lead:'Siga os botões exibidos no seu PS5.',render:screenSecondaryStatus,actions:[],todo:[],note:'No acesso secundário, o compartilhamento não deve ser habilitado neste PS5. Se a tela não corresponder às imagens, use “Minha tela está diferente”.',state:'secondary'},
     ...installationSteps.slice(13,17),
     {id:'sec-perfil',name:'Acessar pela conta com o jogo',lead:'Nesta modalidade, não troque para um perfil sem licença própria.',render:screenSecondaryAccount,actions:[{label:'Use o perfil da conta que possui o jogo e mantenha o PS5 conectado à internet.',focus:circle(1070,458,104)}],todo:['Confira que está usando o perfil com licença válida.','Mantenha a internet disponível para eventual validação online.'],note:'Sem compartilhamento habilitado, não é garantido que outro usuário deste PS5 consiga abrir o jogo.'},
     {id:'sec-fim',name:'Orientação concluída',lead:'Você concluiu o roteiro secundário.',render:screenSecondaryFinish,actions:[],todo:['Conclua o download do jogo.','Acesse o jogo pelo perfil que possui a licença.','Se não abrir ou mostrar cadeado, use o guia de solução de problemas.'],note:'A disponibilidade depende de uma licença válida e das regras da PlayStation.'}
@@ -135,31 +150,27 @@
     {id:'lock-users',name:'Usuários e contas',lead:'Abra as configurações da conta.',render:screenSettings,actions:[{label:'Selecione “Usuários e contas”.',focus:box(225,355,1130,68,4)}],todo:['Escolha “Usuários e contas”.']},
     {id:'lock-others',name:'Selecionar Outros',lead:'O próximo menu fica na coluna esquerda.',render:screenOthers,actions:[{label:'Selecione “Outros”.',focus:box(132,565,367,76,3)}],todo:['Abra a opção “Outros”.']},
     {id:'lock-share-menu',name:'Verificar compartilhamento',lead:'Vamos confirmar como está o compartilhamento do console.',render:screenShareRow,actions:[{label:'Abra “Compartilhamento do console e jogo offline”.',focus:box(542,145,952,151,3)}],todo:['Abra o compartilhamento do console.']},
-    {id:'lock-activation',name:'Verificar ativação',lead:'Escolha o estado que aparece no seu PS5.',render:()=>lockShareState==='ask'?screenLockChoice():screenSharing(lockShareState==='disabled'?'normal':lockShareState),actions:[],todo:[],note:'Só habilite o compartilhamento se tiver autorização do titular. Um PS5 por conta pode ter essa função ativa.',state:'lock'},
+    {id:'lock-activation',name:'Habilitar compartilhamento',lead:'Esta é a tela padrão esperada para liberar o acesso ao jogo.',render:()=>screenSharing('normal'),actions:[{label:'Se esta tela aparecer, selecione “Habilitar”.',focus:box(542,595,520,68,34)}],todo:['Confirme que está na tela de compartilhamento do console.','Selecione “Habilitar”.'],note:'Se aparecer qualquer mensagem diferente da mostrada aqui, pare e fale com o suporte da MCO GAMES.',state:'lock-help'},
+    {id:'lock-activation-ok',name:'Confirmar ativação',lead:'Após habilitar, o PS5 normalmente exibe uma confirmação simples.',render:screenLockEnabledDone,actions:[{label:'Quando a mensagem de ativação aparecer, selecione “OK”.',focus:box(610,700,380,68,34)}],todo:['Confira a mensagem padrão de ativação.','Selecione “OK” para continuar.'],note:'Se a confirmação não aparecer como nesta tela, fale com o suporte antes de continuar.',state:'lock-help'},
     {id:'lock-restore-menu',name:'Restaurar licenças',lead:'Volte ao menu “Outros” para restaurar licenças.',render:screenRestoreMenu,actions:[{label:'Em “Usuários e contas > Outros”, escolha “Restaurar licenças”.',focus:box(545,258,955,87,4)}],todo:['Acesse Configurações > Usuários e contas > Outros.','Selecione Restaurar licenças.']},
     {id:'lock-restore',name:'Confirmar restauração',lead:'Restaure a licença da conta que possui o jogo.',render:screenRestore,actions:[{label:'Selecione o jogo ou as licenças que deseja restaurar.',focus:box(340,351,920,180,10)},{label:'Depois, confirme “Restaurar”.',focus:box(560,645,480,68,34)}],todo:['Selecione os conteúdos solicitados no seu PS5.','Confirme a restauração.'],note:'Restauração não apaga jogos salvos. Algumas versões permitem restaurar diretamente no menu Opções do jogo.'},
     {id:'lock-restart',name:'Reiniciar o PS5',lead:'Reiniciar o console pode ajudar quando o acesso continua bloqueado.',render:screenLockRetry,actions:[{label:'Reinicie o PS5 em Energia > Reiniciar PS5 e tente abrir o jogo.',focus:box(150,302,290,325,8)}],todo:['Reinicie o console usando Energia > Reiniciar PS5.','Depois, verifique o jogo novamente.']},
-    {id:'lock-finish',name:'Testar o jogo',lead:'Faça uma última verificação.',render:screenLockFinish,actions:[{label:'Volte ao jogo. Se o cadeado continuar, procure o suporte.',focus:box(555,464,490,110,12)}],todo:['Tente iniciar o jogo no perfil que tem acesso autorizado.','Se permanecer bloqueado, fale com o suporte e confira os links oficiais.'],note:'Restaurar licenças não cria uma licença inexistente ou recupera uma compra que deixou de estar disponível.'}
+    {id:'lock-finish',name:'Testar o jogo',lead:'Faça uma última verificação.',render:screenLockFinish,actions:[{label:'Volte ao jogo. Se o cadeado continuar, procure o suporte.',focus:box(555,464,490,110,12)}],todo:['Tente iniciar o jogo no perfil que tem acesso autorizado.','Se permanecer bloqueado, fale com o suporte pelo link do WhatsApp.'],note:'Restaurar licenças não cria uma licença inexistente ou recupera uma compra que deixou de estar disponível.'}
   ];
   const stepsFor = m => m==='lock'?lockSteps:m==='secondary'?secondarySteps:installationSteps;
   let steps = stepsFor(mode);
   current = Math.max(0,Math.min(steps.length-1,modePosition[mode]));
-  const lockActions = () => lockShareState==='ask'
-    ? [{label:'Escolha abaixo o que o PS5 está mostrando para você.',focus:box(255,396,1090,230,14)}]
-    : lockShareState==='enabled'
-      ? [{label:'Já está habilitado? Selecione “Não desativar” e siga para restaurar as licenças.',focus:box(540,659,520,68,34)}]
-      : lockShareState==='conflict'
-        ? [{label:'Apareceu aviso de outro PS5? Não substitua a ativação. Procure o suporte.',focus:box(255,681,540,68,34)}]
-        : [{label:'Se o titular autorizou este PS5, selecione “Habilitar”.',focus:box(542,595,520,68,34)}];
+  const lockActions = () => [{label:'Se o PS5 mostrar esta tela, selecione “Habilitar”.',focus:box(542,595,520,68,34)}];
   const shareActions=()=> shareState==='enabled' ? [{label:'Se já estiver habilitado, mantenha a configuração. Não desative.',focus:box(540,659,520,68,34)}] : shareState==='conflict' ? [{label:'Apareceu aviso sobre outro PS5? Não habilite antes de confirmar com o titular.',focus:box(255,681,540,68,34)}] : [{label:'Se autorizado pelo titular, selecione “Habilitar”.',focus:box(542,595,520,68,34)}];
   const shareTodos=()=>shareState==='enabled' ? ['O compartilhamento já está habilitado neste PS5.','Mantenha a configuração e avance.'] : shareState==='conflict' ? ['O PS5 informa que outra ativação poderá ser substituída.','Não prossiga sem autorização expressa do titular.','Procure o suporte antes de mudar a ativação.'] : ['O compartilhamento está desabilitado.','Confirme que o titular autorizou este console.','Selecione “Habilitar”, quando permitido.'];
-  const secondaryActions=()=>secondaryShareState==='ask'
-    ? [{label:'Escolha abaixo o que aparece em seu PS5.',focus:box(255,396,1090,230,14)}]
-    : secondaryShareState==='enabled'
-      ? [{label:'Já está habilitado? Não desative sem autorização do titular.',focus:box(540,657,520,68,34)}]
-      : secondaryShareState==='conflict'
-        ? [{label:'Outro PS5 habilitado? Não altere a ativação. Selecione “Não habilitar”.',focus:box(273,677,520,68,34)}]
-        : [{label:'Nesta modalidade, mantenha desabilitado. Selecione “Não habilitar”.',focus:box(540,653,520,68,34)}];
+  const secondaryActions=()=>secondaryShareState==='disabled'
+    ? [{label:'Se o PS5 mostra “Habilitar”, já está desativado. Não habilite e continue.',focus:box(465,260,670,150,18)}]
+    : secondaryShareState==='error'
+      ? [{label:'Se apareceu erro ou não foi possível desativar, peça ajuda à MCO GAMES.',focus:box(435,285,730,190,18)}]
+      : [
+          {label:'Na conta secundária, selecione “Desativar”.',focus:box(860,778,370,68,34)},
+          {label:'Depois, na tela de confirmação, selecione “OK”.',focus:box(610,700,380,68,34)}
+        ];
   const currentActions=()=> steps[current].id==='ativacao' ? shareActions() : steps[current].id==='lock-activation' ? lockActions() : steps[current].id==='sec-ativacao'?secondaryActions():steps[current].actions;
   function svgFrame(body){
     return `<svg xmlns="http://www.w3.org/2000/svg" class="console-svg" viewBox="0 0 1600 900" aria-hidden="true"><defs><radialGradient id="psBG" cx=".08" cy=".07" r="1.25"><stop offset="0" stop-color="#625259"/><stop offset=".5" stop-color="#22202f"/><stop offset="1" stop-color="#0a0920"/></radialGradient><linearGradient id="blueHome" x2=".95" y2=".78"><stop stop-color="#04395a"/><stop offset=".52" stop-color="#006a9e"/><stop offset="1" stop-color="#032052"/></linearGradient><linearGradient id="libraryBG"><stop stop-color="#080612"/><stop offset=".7" stop-color="#090715"/><stop offset="1" stop-color="#1f1a34"/></linearGradient><linearGradient id="coverBG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#114ca2"/><stop offset=".55" stop-color="#252d79"/><stop offset="1" stop-color="#0b1528"/></linearGradient><filter id="neonGlow" x="-90%" y="-90%" width="280%" height="280%"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>${backdrop(['config-home','biblioteca-home','perfil-menu','logout','lock-settings'].includes(steps[current].id)?'home':['biblioteca','jogo','download','lock-intro','lock-restart'].includes(steps[current].id)?'library':'classic')}${body}<g id="guideOverlay" pointer-events="none"></g></svg>`;
@@ -228,7 +239,7 @@
       if(['fim','sec-fim','lock-finish'].includes(steps[current].id)){
         autoPlaying=false;$('pauseAuto').textContent='✓ Concluído';return;
       }
-      if((steps[current].id==='ativacao' && shareState==='conflict') || (steps[current].id==='lock-activation' && ['ask','conflict'].includes(lockShareState)) || (steps[current].id==='sec-ativacao' && secondaryShareState==='ask')){
+      if((steps[current].id==='ativacao' && shareState==='conflict') || (steps[current].id==='lock-activation' && ['ask','conflict'].includes(lockShareState)) || (steps[current].id==='sec-ativacao' && secondaryShareState==='error')){
         autoPlaying=false;$('pauseAuto').textContent='▶ Continuar';return;
       }
       stopTicker();rafId=requestAnimationFrame(tick);
@@ -252,13 +263,15 @@
     if(!autoPlaying)return;
     const list=currentActions();
     if(currentAction<list.length-1){currentAction++;updateAction();return;}
-    if((steps[current].id==='ativacao'&&shareState==='conflict') || (steps[current].id==='lock-activation'&&['ask','conflict'].includes(lockShareState)) || (steps[current].id==='sec-ativacao'&&secondaryShareState==='ask')){setPlaying(false);return;}
+    if((steps[current].id==='ativacao'&&shareState==='conflict') || (steps[current].id==='sec-ativacao'&&secondaryShareState==='error')){setPlaying(false);return;}
     if(current>=steps.length-1){setPlaying(false);return;}
     go(current+1);
   }
   function updateAction(){
     stopTicker();elapsedMs=0;timelineStart=null;
     const actions=currentActions(); if(currentAction>=actions.length)currentAction=0;
+    // Duas telas reais dentro do mesmo passo: Desativar → confirmação OK.
+    if(steps[current].id==='sec-ativacao') $('sceneRoot').innerHTML=svgFrame(steps[current].render());
     const a=actions[currentAction];
     $('actionCount').textContent=actions.length>1?`Indicação ${currentAction+1} de ${actions.length}`:actions.length?'Siga a indicação':'Concluído';
     $('actionText').textContent=a?.label || 'Aproveite seu jogo!';
@@ -285,22 +298,24 @@
     $('guide').setAttribute('data-guide-mode',mode);
     $('sceneTitle').textContent=s.name;
     $('sceneLead').textContent=s.lead;
-    $('directions').innerHTML=(s.state?shareTodos():s.todo).map((t,i)=>`<div class="direction"><em>${i+1}</em><span>${h(t)}</span></div>`).join('');
+    $('directions').innerHTML=(s.state===true?shareTodos():s.todo).map((t,i)=>`<div class="direction"><em>${i+1}</em><span>${h(t)}</span></div>`).join('');
     $('warning').textContent=s.note||'';
-    $('extraOptions').innerHTML=s.state==='lock'
-      ? '<label for="lockShareChoice">O que aparece na tela?</label><select id="lockShareChoice"><option value="ask">Selecione a situação...</option><option value="enabled">Já está habilitado</option><option value="disabled">Está desabilitado</option><option value="conflict">Ativado em outro PS5</option></select>'
+    $('extraOptions').innerHTML=s.state==='lock-help'
+      ? '<button type="button" id="lockTrouble" class="secondary-trouble">? Minha tela está diferente</button>'
       : s.state==='secondary'
-        ? '<label for="secondaryShareChoice">O que aparece na tela?</label><select id="secondaryShareChoice"><option value="ask">Selecione a situação...</option><option value="disabled">Está desabilitado</option><option value="enabled">Já está habilitado</option><option value="conflict">Há outro PS5 habilitado</option></select>'
+        ? '<button type="button" id="secondaryTrouble" class="secondary-trouble">? Minha tela está diferente</button>'
         : s.state?'<label for="shareChoice">O que aparece na tela?</label><select id="shareChoice"><option value="normal">Habilitar</option><option value="enabled">Já está habilitado</option><option value="conflict">Aviso de outro PS5</option></select>':'';
-    if(s.state==='lock'){
-      $('lockShareChoice').value=lockShareState;
-      $('lockShareChoice').onchange=e=>{
-        lockShareState=e.target.value; currentAction=0; autoPlaying=!['ask','conflict'].includes(lockShareState);
-        render();
-      };
+    // Aviso de outro PS5: pausa o guia e oferece contato direto com a MCO GAMES.
+    if (s.id==='ativacao' && shareState==='conflict') {
+      $('extraOptions').insertAdjacentHTML('beforeend', conflictSupportLink());
+    }
+    if (s.id==='sec-ativacao' && secondaryShareState==='error') {
+      $('extraOptions').insertAdjacentHTML('beforeend', secondarySupportLink());
+    }
+    if(s.state==='lock-help'){
+      $('lockTrouble').onclick=()=>openModal('Sua tela está diferente?', `<p>O caminho padrão desta etapa é:</p><ul><li>aparecer o botão <strong>“Habilitar”</strong>;</li><li>depois surgir a confirmação <strong>“Você habilitou...”</strong>;</li><li>por fim, tocar em <strong>OK</strong>.</li></ul><p>Se o seu PS5 mostrar qualquer mensagem diferente, não continue sem orientação.</p><p>${lockSupportLink()}</p>`);
     } else if(s.state==='secondary'){
-      $('secondaryShareChoice').value=secondaryShareState;
-      $('secondaryShareChoice').onchange=e=>{secondaryShareState=e.target.value;currentAction=0;autoPlaying=secondaryShareState!=='ask';render();};
+      $('secondaryTrouble').onclick=()=>openModal('Sua tela está diferente?', `<p>Escolha a situação que aconteceu no seu PS5:</p><div class="secondary-help-choices"><button type="button" id="secondaryAlreadyDisabled" class="secondary-help-choice">Aparece “Habilitar” (já está desativado)</button><button type="button" id="secondaryActivationError" class="secondary-help-choice">Deu erro ou não consegui desativar</button><button type="button" id="secondaryBackStandard" class="secondary-help-choice">Voltar à tela “Desativar”</button></div><p>Se não conseguir concluir, fale com nosso atendimento:</p><p>${secondarySupportLink()}</p>`);
     } else if(s.state){$('shareChoice').value=shareState;$('shareChoice').onchange=e=>{shareState=e.target.value;currentAction=0;if(shareState==='conflict')setPlaying(false);else setPlaying(true);render();};}
     $('sceneRoot').innerHTML=svgFrame(s.render());
     $('stepNavigation').innerHTML=steps.map((item,i)=>`<button type="button" class="${i===current?'active':''} ${done.has(mode+':'+item.id)?'done':''}" data-index="${i}" ${i===current?'aria-current="step"':''}><span class="number">${done.has(mode+':'+item.id)?'✓':String(i+1).padStart(2,'0')}</span>${h(item.name)}</button>`).join('');
@@ -310,10 +325,10 @@
     $('progressFill').style.width=`${Math.round((current+1)/steps.length*100)}%`;
     $('backStep').disabled=current===0;
     $('nextStep').textContent=current===steps.length-1?'✓ Finalizar':'Próxima tela →';
-    $('nextStep').disabled=(s.id==='ativacao'&&shareState==='conflict')||(s.id==='lock-activation'&&['ask','conflict'].includes(lockShareState))||(s.id==='sec-ativacao'&&secondaryShareState==='ask');
+    $('nextStep').disabled=(s.id==='ativacao'&&shareState==='conflict')||(s.id==='sec-ativacao'&&secondaryShareState==='error');
     $('nextStep').title=$('nextStep').disabled?'Escolha a situação ou procure o titular antes de prosseguir':'';
     save();updateAction();
-    if((s.id==='lock-activation' && ['ask','conflict'].includes(lockShareState)) || (s.id==='sec-ativacao' && secondaryShareState==='ask')) setPlaying(false);
+    if((s.id==='lock-activation' && ['ask','conflict'].includes(lockShareState)) || (s.id==='sec-ativacao' && secondaryShareState==='error')) setPlaying(false);
   }
   function save(){
     modePosition[mode] = current;modeAction[mode] = currentAction;
@@ -322,13 +337,13 @@
   function go(next){
     if(next<0||next>=steps.length)return;
     if(mode==='primary' && shareState==='conflict' && next>steps.findIndex(x=>x.id==='ativacao')){
-      openModal('Confirme a ativação','<p>Esta conta já está habilitada em outro PS5. Procure a MCO GAMES antes de mudar a ativação.</p>');return;
+      openModal('Confirme a ativação',`<p>Esta conta já está habilitada em outro PS5. Não altere a ativação sem ajuda do titular.</p><p>${conflictSupportLink()}</p>`);return;
     }
     if(mode==='lock' && ['ask','conflict'].includes(lockShareState) && next>steps.findIndex(x=>x.id==='lock-activation')){
       openModal('Confira o compartilhamento','<p>Na etapa de ativação, selecione a situação exibida no seu PS5. Se estiver ativo em outro console, não substitua a ativação sem autorização do titular.</p>');return;
     }
-    if(mode==='secondary' && secondaryShareState==='ask' && next>steps.findIndex(x=>x.id==='sec-ativacao')){
-      openModal('Confira o compartilhamento','<p>Escolha primeiro a situação que aparece no seu PS5. Não altere uma ativação existente sem autorização.</p>');return;
+    if(mode==='secondary' && secondaryShareState==='error' && next>steps.findIndex(x=>x.id==='sec-ativacao')){
+      openModal('Precisa de ajuda para desativar?',`<p>O compartilhamento não foi desativado. Solicite orientação à MCO GAMES antes de avançar.</p><p>${secondarySupportLink()}</p>`);return;
     }
     done.add(mode+':'+steps[current].id);current=next;currentAction=0;render();
   }
@@ -397,10 +412,20 @@
   $('closeSteps').onclick=closeSidebar;$('sidebarShade').onclick=closeSidebar;
   $('restart').onclick=()=>openModal('Reiniciar tutorial?','<p>O roteiro atual voltará para a primeira etapa.</p><button id="confirmRestart" class="btn btn-secondary" type="button">Sim, reiniciar</button>');
   document.addEventListener('click',e=>{
+    const button=e.target?.closest?.('button');
+    if(mode==='secondary' && steps[current]?.id==='sec-ativacao' && ['secondaryAlreadyDisabled','secondaryActivationError','secondaryBackStandard'].includes(button?.id)){
+      secondaryShareState=button.id==='secondaryAlreadyDisabled'?'disabled':button.id==='secondaryActivationError'?'error':'enabled';
+      currentAction=0;
+      resumeAfterModal=false;
+      closeModal();
+      autoPlaying=secondaryShareState!=='error';
+      render();
+      return;
+    }
     if(e.target?.id==='confirmRestart'){
       steps.forEach(s=>done.delete(mode+':'+s.id));
       if(mode==='primary')shareState='normal';
-      if(mode==='secondary')secondaryShareState='ask';
+      if(mode==='secondary')secondaryShareState='enabled';
       if(mode==='lock')lockShareState='ask';
       current=0;currentAction=0;modePosition[mode]=0;autoPlaying=false;
       stopTicker();save();resumeAfterModal=false;closeModal();closeSidebar();
@@ -425,6 +450,7 @@
     else if(resumeAfterHide && $('modal').classList.contains('hidden')&&$('zoomModal').classList.contains('hidden')){resumeAfterHide=false;setPlaying(true);}
   });
   $('gameWelcome').textContent=game;
+  $('gameContext').hidden = game.toLocaleLowerCase('pt-BR') === 'seu jogo';
   $('gameSubtitle').textContent=game;
   // A tela inicial oferece sempre as três opções.
   if(hintedKind==='primaria')$('choosePrimary').classList.add('suggested');

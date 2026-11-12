@@ -1,3 +1,9 @@
+## v0.7.4 — Testes recomendados
+1. Abrir o guia “CADEADO NO JOGO” e confirmar que a etapa “Habilitar compartilhamento” mostra o fluxo padrão.
+2. Avançar para “Confirmar ativação” e verificar a tela padrão com botão OK.
+3. Clicar em “Minha tela está diferente” nessas etapas e validar a abertura do modal com link do WhatsApp.
+4. Conferir os rótulos “Sua Conta Pessoal” nas telas aplicáveis.
+
 # Testes da versão 0.7
 
 ## Verificações automatizadas locais
@@ -24,3 +30,14 @@
 - As escolhas do cliente não executam ações no PS5: apenas orientam o que selecionar manualmente.
 - Progresso é salvo localmente no navegador; não há armazenamento de credenciais nem de códigos 2FA.
 - O acesso aos jogos continua dependendo de licença válida e das regras oficiais da PlayStation.
+
+## v0.7.3 — Secundária: fluxo principal e alternativas
+- Conferido com Playwright em 1440×900, 390×844 e 360×640.
+- Etapa 13 abre diretamente em **Desativar**, sem seletor de estado.
+- Próxima indicação troca a tela ilustrativa para confirmação **OK**.
+- Reprodução automática: ~7,1 s por indicação (dois ciclos); avanço automático após OK.
+- Botão **Minha tela está diferente** abre alternativas de desativação prévia, erro e retorno à tela padrão.
+- Caso já esteja desativado: libera a continuação, sem orientar habilitar.
+- Caso de erro: pausa o roteiro, desabilita Próxima e mostra WhatsApp contextual.
+- Sem erros JavaScript nos três tamanhos; sem rolagem vertical da página.
+- Regressão: Primária e Cadeado continuam com suas opções específicas.
