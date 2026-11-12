@@ -25,3 +25,13 @@ Envie **index.html** para a raiz do repositório. As imagens do roteiro Cadeado 
 - A imagem original de Elden Ring continua servindo de fundo; o neon é uma animação SVG dinâmica com duas repetições.
 - O identificador **Sua Conta Pessoal** foi posicionado sobre o nome original, evitando nomes duplicados.
 - As outras 12 etapas, os modos Primária/Secundária e os logos não foram modificados.
+
+## Ajuste v0.8.3
+Os quatro alvos indicados no tutorial Cadeado (conta do jogo, Configurações, conta pessoal e capa do jogo) foram realinhados ao conteúdo das capturas. Para publicar, envie o `index.html` atualizado à raiz do GitHub Pages.
+
+
+## v0.8.4 — Loja MCO GAMES
+- Novo botão “Loja MCO GAMES” no cabeçalho, visível na abertura e durante os três roteiros.
+- Link externo: https://mcogames.github.io/store/ (abre em nova aba).
+- Em telas estreitas, o rótulo é abreviado para “Loja” e mantém texto acessível.
+- Telas, animações e tutoriais mantidos como na v0.8.3.
